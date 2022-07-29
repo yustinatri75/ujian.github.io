@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class AdminUjianController extends Controller
 {
     use UjianTrait;
+
     public function index()
     {
         $dataSesiUjian = UjianSession::with('ujian_pesertas')->get();
@@ -26,10 +27,11 @@ class AdminUjianController extends Controller
             $result[] = $peserta;
         }
 
-        $parser = ['dataResult' => $result];
+        $parser = ['dataResult' => $result, 'dataSesi' => $dataSesi];
         return view('main.admin_ujian.detail')->with($parser);
     }
-    public function detailJawabanSiswa()
+
+    public function detailJawabanSiswa($sesiId, $ujianPesertaId)
     {
 
     }

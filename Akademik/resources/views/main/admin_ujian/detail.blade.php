@@ -17,6 +17,7 @@
                         <tr>
                             <th>Siswa</th>
                             <th>Skor</th>
+{{--                            <th>Aksi</th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -24,6 +25,12 @@
                             <tr>
                                 <td>{{ $result->sys_user->user_email }}</td>
                                 <td>{{ $result->hasil }}</td>
+                                <td>
+                                    <a href="{{url('/main/admin/ujian/' . $dataSesi->id . '/peserta/' .  $result->id.'/jawaban')}}"
+                                       class="btn btn-primary btn-sm">
+                                        Lihat Jawaban
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

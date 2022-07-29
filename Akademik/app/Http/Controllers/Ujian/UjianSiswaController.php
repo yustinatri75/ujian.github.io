@@ -36,6 +36,7 @@ class UjianSiswaController extends Controller
                     $join->on('ujian_peserta_jawaban.peserta_id', DB::raw($dataUjian->id));
                     $join->on('ujian_peserta_jawaban.soal_id', 'ujian_soal.id');
                 })
+                ->where('sesi_id', '=', $dataUjian->ujian_session->id)
                 ->get();
 
             $sisaWaktu = Carbon::now()->diffInMinutes($dataUjian->ujian_session->waktu_selesai);
