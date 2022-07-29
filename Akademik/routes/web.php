@@ -22,6 +22,7 @@ Route::prefix('ujian')->group(function () {
     Route::get('/{ujian_peserta_id}/exam', [UjianSiswaController::class, 'exam']);
     Route::get('/{ujian_peserta_id}/preview', [UjianSiswaController::class, 'preview']);
     Route::post('/{ujian_peserta_id}/save-answer', [UjianSiswaController::class, 'saveAnswer']);
+    Route::post('/{ujian_peserta_id}/finish', [UjianSiswaController::class, 'finish']);
 });
 
 Route::prefix('main')->middleware('auth')->group(function () {

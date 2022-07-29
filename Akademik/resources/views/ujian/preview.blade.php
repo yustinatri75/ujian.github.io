@@ -24,31 +24,13 @@
                         @endforeach
                     </table>
                     <div>
-                        <a href="" class=" btn btn-primary">Selesai</a>
+                        <form action="{{ url('/ujian/' . $dataUjian->id . '/finish') }}" method="post">
+                            @csrf
+                            <button type="submit" class=" btn btn-primary">Selesai</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-
-@push('foot')
-    <script>
-        async function saveAnswer(soal, jawaban) {
-            const result = fetch(`{{ url('/ujian/' . $dataUjian->id .'/save-answer') }}`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-type': 'application/json',
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                body: JSON.stringify({
-                    soal_id: soal,
-                    jawaban_id: jawaban,
-                })
-            })
-
-            console.log(result);
-        }
-    </script>
-@endpush

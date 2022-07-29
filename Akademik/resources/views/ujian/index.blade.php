@@ -27,7 +27,10 @@
                                 <td>{{$exam->ujian_session->judul}}</td>
                                 <td>{{$exam->ujian_session->waktu_mulai->isoFormat('LLLL')}} <br> s/d
                                     <br>{{$exam->ujian_session->waktu_selesai->isoFormat('LLLL')}}</td>
-                                @if(\Carbon\Carbon::now() >= $exam->ujian_session->waktu_mulai && \Carbon\Carbon::now() <= $exam->ujian_session->waktu_selesai)
+                                @if(\Carbon\Carbon::now() >= $exam->ujian_session->waktu_mulai &&
+                                    \Carbon\Carbon::now() <= $exam->ujian_session->waktu_selesai &&
+                                    $exam->finish_awal == 0
+                                    )
                                     <td>Open</td>
                                     <th>
                                         <a href="{{ url('ujian/' . $exam->id . '/exam') }}" class="btn btn-primary">Exam</a>

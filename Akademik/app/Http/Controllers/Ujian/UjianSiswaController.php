@@ -10,9 +10,12 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Traits\UjianTrait;
 
 class UjianSiswaController extends Controller
 {
+    use UjianTrait;
+
     public function index()
     {
         $dataExam = UjianPeserta::with('ujian_session')->where('peserta_id', auth()->id())->get();
@@ -25,15 +28,7 @@ class UjianSiswaController extends Controller
         // Checking apakah waktu masih ada ?
         try {
             $timeNow = Carbon::now();
-            $dataUjian = UjianPeserta::with('ujian_session')
-                ->where('peserta_id', auth()->id())
-                ->where('id', $ujianPesertaId)
-                ->first();
-
-            if (empty($dataUjian)) throw new Exception("Sesi Ujian tidak ditemukan");
-            if (!($timeNow >= $dataUjian->ujian_session->waktu_mulai && $timeNow <= $dataUjian->ujian_session->waktu_selesai)) {
-                throw new Exception('Diluar waktu Sesi ujian');
-            }
+            $dataUjian = $this->dataUjian($ujianPesertaId);
 
             $dataSoal = UjianSoal::with('ujian_jawabans')
                 ->select('ujian_peserta_jawaban.jawaban_id', 'ujian_soal.id', 'ujian_soal.sesi_id', 'ujian_soal.soal')
@@ -56,15 +51,7 @@ class UjianSiswaController extends Controller
         // Checking apakah waktu masih ada ?
         try {
             $timeNow = Carbon::now();
-            $dataUjian = UjianPeserta::with('ujian_session')
-                ->where('peserta_id', auth()->id())
-                ->where('id', $ujianPesertaId)
-                ->first();
-
-            if (empty($dataUjian)) throw new Exception("Sesi Ujian tidak ditemukan");
-            if (!($timeNow >= $dataUjian->ujian_session->waktu_mulai && $timeNow <= $dataUjian->ujian_session->waktu_selesai)) {
-                throw new Exception('Diluar waktu Sesi ujian');
-            }
+            $dataUjian = $this->dataUjian($ujianPesertaId);
 
             $dataSoal = UjianSoal::with('ujian_jawabans')
                 ->select('ujian_soal.id')
@@ -95,6 +82,21 @@ class UjianSiswaController extends Controller
             );
 
             return response()->json(['message' => 'success']);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function finish(Request $request, $ujianPesertaId)
+    {
+        try {
+            $dataUjian = $this->dataUjian($ujianPesertaId);
+            $dataUjian->finish_awal = 1;
+            $dataUjian->save();
+
+            return redirect('/ujian');
         } catch (Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
