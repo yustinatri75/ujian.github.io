@@ -30,7 +30,7 @@
                                 @if(\Carbon\Carbon::now() >= $exam->ujian_session->waktu_mulai && \Carbon\Carbon::now() <= $exam->ujian_session->waktu_selesai)
                                     <td>Open</td>
                                     <th>
-                                        <button class="btn btn-primary">Exam</button>
+                                        <a href="{{ url('ujian/' . $exam->id . '/exam') }}" class="btn btn-primary">Exam</a>
                                     </th>
                                 @else
                                     <td>Closed</td>

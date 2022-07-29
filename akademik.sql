@@ -11,7 +11,7 @@
  Target Server Version : 80021 (8.0.21)
  File Encoding         : 65001
 
- Date: 29/07/2022 10:11:26
+ Date: 29/07/2022 11:01:50
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `data_kelas`  (
   PRIMARY KEY (`kelas_id`) USING BTREE,
   INDEX `data_kelas_master_dosen_dosen_id_fk`(`kelas_dosen_id` ASC) USING BTREE,
   CONSTRAINT `data_kelas_master_dosen_dosen_id_fk` FOREIGN KEY (`kelas_dosen_id`) REFERENCES `master_dosen` (`dosen_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of data_kelas
@@ -51,7 +51,7 @@ CREATE TABLE `data_kelas_detail`  (
   INDEX `data_kelas_detail_data_kelas_kelas_id_fk`(`kdet_kelas_id` ASC) USING BTREE,
   CONSTRAINT `data_kelas_detail_data_kelas_kelas_id_fk` FOREIGN KEY (`kdet_kelas_id`) REFERENCES `data_kelas` (`kelas_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `data_kelas_detail_data_krs_krs_id_fk` FOREIGN KEY (`kdet_krs_id`) REFERENCES `data_krs` (`krs_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of data_kelas_detail
@@ -73,7 +73,7 @@ CREATE TABLE `data_krs`  (
   INDEX `data_krs_master_mahasiswa_mhs_id_fk`(`krs_mhs_id` ASC) USING BTREE,
   CONSTRAINT `data_krs_data_matakuliah_dtmakul_id_fk` FOREIGN KEY (`krs_dtmakul_id`) REFERENCES `data_matakuliah` (`dtmakul_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `data_krs_master_mahasiswa_mhs_id_fk` FOREIGN KEY (`krs_mhs_id`) REFERENCES `master_mahasiswa` (`mhs_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of data_krs
@@ -91,7 +91,7 @@ CREATE TABLE `data_matakuliah`  (
   PRIMARY KEY (`dtmakul_id`) USING BTREE,
   INDEX `makul_id`(`makul_id` ASC) USING BTREE,
   CONSTRAINT `data_matakuliah_ibfk_1` FOREIGN KEY (`makul_id`) REFERENCES `master_matakuliah` (`makul_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of data_matakuliah
@@ -115,7 +115,7 @@ CREATE TABLE `master_dosen`  (
   INDEX `dosen_prodi_id`(`dosen_prodi_id` ASC) USING BTREE,
   CONSTRAINT `master_dosen_ibfk_1` FOREIGN KEY (`dosen_prodi_id`) REFERENCES `master_prodi` (`prodi_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `master_dosen_ibfk_2` FOREIGN KEY (`dosen_user_id`) REFERENCES `sys_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of master_dosen
@@ -137,7 +137,7 @@ CREATE TABLE `master_dosen_pengampu`  (
   INDEX `master_dosen_pengampu_master_matakuliah_makul_id_fk`(`dp_makul_id` ASC) USING BTREE,
   CONSTRAINT `master_dosen_pengampu_master_dosen_dosen_id_fk` FOREIGN KEY (`dp_dosen_id`) REFERENCES `master_dosen` (`dosen_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `master_dosen_pengampu_master_matakuliah_makul_id_fk` FOREIGN KEY (`dp_makul_id`) REFERENCES `master_matakuliah` (`makul_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of master_dosen_pengampu
@@ -161,7 +161,7 @@ CREATE TABLE `master_mahasiswa`  (
   INDEX `mhs_prodi_id`(`mhs_prodi_id` ASC) USING BTREE,
   CONSTRAINT `master_mahasiswa_ibfk_1` FOREIGN KEY (`mhs_user_id`) REFERENCES `sys_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `master_mahasiswa_ibfk_2` FOREIGN KEY (`mhs_prodi_id`) REFERENCES `master_prodi` (`prodi_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of master_mahasiswa
@@ -182,7 +182,7 @@ CREATE TABLE `master_matakuliah`  (
   PRIMARY KEY (`makul_id`) USING BTREE,
   UNIQUE INDEX `makul_tingkat_id`(`makul_tingkat_id` ASC, `makul_kode` ASC) USING BTREE,
   CONSTRAINT `master_matakuliah_ibfk_1` FOREIGN KEY (`makul_tingkat_id`) REFERENCES `master_tingkat` (`tingkat_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of master_matakuliah
@@ -205,7 +205,7 @@ CREATE TABLE `master_prodi`  (
   PRIMARY KEY (`prodi_id`) USING BTREE,
   UNIQUE INDEX `prodi_kode`(`prodi_kode` ASC) USING BTREE,
   UNIQUE INDEX `prodi_kode_2`(`prodi_kode` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of master_prodi
@@ -224,7 +224,7 @@ CREATE TABLE `master_tingkat`  (
   `tingkat_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `tingkat_updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`tingkat_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of master_tingkat
@@ -245,7 +245,7 @@ CREATE TABLE `master_ujian_jawaban`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of master_ujian_jawaban
@@ -277,7 +277,7 @@ CREATE TABLE `sys_level`  (
   `level_created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `level_updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`level_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_level
@@ -303,7 +303,7 @@ CREATE TABLE `sys_user`  (
   PRIMARY KEY (`user_id`) USING BTREE,
   INDEX `user_level_id`(`user_level_id` ASC) USING BTREE,
   CONSTRAINT `sys_user_ibfk_1` FOREIGN KEY (`user_level_id`) REFERENCES `sys_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
@@ -323,8 +323,10 @@ CREATE TABLE `ujian_jawaban`  (
   `skor` float NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `ujian_jawaban_ujian_soal_id_fk`(`soal_id` ASC) USING BTREE,
+  CONSTRAINT `ujian_jawaban_ujian_soal_id_fk` FOREIGN KEY (`soal_id`) REFERENCES `ujian_soal` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ujian_jawaban
@@ -353,7 +355,7 @@ CREATE TABLE `ujian_peserta`  (
   INDEX `ujian_peserta_ujian_session_id_fk`(`sesi_id` ASC) USING BTREE,
   CONSTRAINT `ujian_peserta_ibfk_1` FOREIGN KEY (`peserta_id`) REFERENCES `sys_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ujian_peserta_ujian_session_id_fk` FOREIGN KEY (`sesi_id`) REFERENCES `ujian_session` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ujian_peserta
@@ -378,7 +380,7 @@ CREATE TABLE `ujian_peserta_jawaban`  (
   CONSTRAINT `ujian_peserta_jawaban_ibfk_1` FOREIGN KEY (`peserta_id`) REFERENCES `ujian_peserta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ujian_peserta_jawaban_ibfk_3` FOREIGN KEY (`jawaban_id`) REFERENCES `ujian_jawaban` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ujian_peserta_jawaban_ibfk_4` FOREIGN KEY (`soal_id`) REFERENCES `ujian_soal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ujian_peserta_jawaban
@@ -397,7 +399,7 @@ CREATE TABLE `ujian_session`  (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ujian_session
@@ -410,16 +412,19 @@ INSERT INTO `ujian_session` VALUES (1, 'Ujian CBT Pemrograman', '2022-07-29 10:0
 DROP TABLE IF EXISTS `ujian_soal`;
 CREATE TABLE `ujian_soal`  (
   `id` int NOT NULL AUTO_INCREMENT,
+  `sesi_id` int NULL DEFAULT NULL,
   `soal` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `ujian_soal_ujian_session_id_fk`(`sesi_id` ASC) USING BTREE,
+  CONSTRAINT `ujian_soal_ujian_session_id_fk` FOREIGN KEY (`sesi_id`) REFERENCES `ujian_session` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ujian_soal
 -- ----------------------------
-INSERT INTO `ujian_soal` VALUES (1, 'Apa Nama Ibu Kota Indonesia', '2022-07-29 09:19:28', '2022-07-29 09:19:29');
-INSERT INTO `ujian_soal` VALUES (2, 'Jenis Apakah Keleawar', '2022-07-29 09:19:42', '2022-07-29 09:19:42');
+INSERT INTO `ujian_soal` VALUES (1, 1, 'Apa Nama Ibu Kota Indonesia', '2022-07-29 09:19:28', '2022-07-29 09:19:29');
+INSERT INTO `ujian_soal` VALUES (2, 1, 'Jenis Apakah Keleawar', '2022-07-29 09:19:42', '2022-07-29 09:19:42');
 
 SET FOREIGN_KEY_CHECKS = 1;

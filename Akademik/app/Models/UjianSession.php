@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $updated_at
  * 
  * @property Collection|UjianPeserta[] $ujian_pesertas
+ * @property Collection|UjianSoal[] $ujian_soals
  *
  * @package App\Models
  */
@@ -48,5 +49,10 @@ class UjianSession extends Model
 	public function ujian_pesertas()
 	{
 		return $this->hasMany(UjianPeserta::class, 'sesi_id');
+	}
+
+	public function ujian_soals()
+	{
+		return $this->hasMany(UjianSoal::class, 'sesi_id');
 	}
 }

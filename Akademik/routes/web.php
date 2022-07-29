@@ -19,6 +19,7 @@ Route::get('logout', [Auth\LoginController::class, 'logout'])->name('logout');
 
 Route::prefix('ujian')->group(function() {
     Route::get('/', [UjianSiswaController::class, 'index']);
+    Route::get('/{ujian_peserta_id}/exam', [UjianSiswaController::class, 'exam']);
 });
 
 Route::prefix('main')->middleware('auth')->group(function () {

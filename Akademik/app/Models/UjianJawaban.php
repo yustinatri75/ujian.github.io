@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
+ * @property UjianSoal|null $ujian_soal
  * @property Collection|UjianPesertaJawaban[] $ujian_peserta_jawabans
  *
  * @package App\Models
@@ -38,6 +39,11 @@ class UjianJawaban extends Model
 		'jawaban',
 		'skor'
 	];
+
+	public function ujian_soal()
+	{
+		return $this->belongsTo(UjianSoal::class, 'soal_id');
+	}
 
 	public function ujian_peserta_jawabans()
 	{
