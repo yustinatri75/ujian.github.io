@@ -17,15 +17,17 @@ Route::prefix('auth')->middleware('guest')->group(function () {
 });
 Route::get('logout', [Auth\LoginController::class, 'logout'])->name('logout');
 
-Route::prefix('ujian')->group(function() {
+Route::prefix('ujian')->group(function () {
     Route::get('/', [UjianSiswaController::class, 'index']);
     Route::get('/{ujian_peserta_id}/exam', [UjianSiswaController::class, 'exam']);
+    Route::get('/{ujian_peserta_id}/preview', [UjianSiswaController::class, 'preview']);
+    Route::post('/{ujian_peserta_id}/save-answer', [UjianSiswaController::class, 'saveAnswer']);
 });
 
 Route::prefix('main')->middleware('auth')->group(function () {
     Route::get('dashboard', [Main\DashboardController::class, 'index'])->name('home');
 
-    Route::prefix('data/mahasiswa')->group(function() {
+    Route::prefix('data/mahasiswa')->group(function () {
         Route::get('/', [Main\DataMahasiswaController::class, 'index']);
         Route::get('/add', [Main\DataMahasiswaController::class, 'add']);
         Route::post('/add', [Main\DataMahasiswaController::class, 'store']);
@@ -34,7 +36,7 @@ Route::prefix('main')->middleware('auth')->group(function () {
         Route::get('/delete/{user_id}', [Main\DataMahasiswaController::class, 'destroy']);
     });
 
-    Route::prefix('data/dosen')->group(function() {
+    Route::prefix('data/dosen')->group(function () {
         Route::get('/', [Main\DataDosenController::class, 'index']);
     });
 
