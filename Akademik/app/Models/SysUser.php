@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
@@ -24,6 +25,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property SysLevel $sys_level
  * @property MasterDosen $master_dosen
  * @property MasterMahasiswa $master_mahasiswa
+ * @property Collection|UjianPeserta[] $ujian_pesertas
  *
  * @package App\Models
  */
@@ -58,11 +60,6 @@ class SysUser extends Authenticatable
 		'user_token'
 	];
 
-    public function getAuthPassword()
-    {
-        return $this->user_password;
-    }
-
 	public function sys_level()
 	{
 		return $this->belongsTo(SysLevel::class, 'user_level_id');
@@ -76,5 +73,10 @@ class SysUser extends Authenticatable
 	public function master_mahasiswa()
 	{
 		return $this->hasOne(MasterMahasiswa::class, 'mhs_user_id');
+	}
+
+	public function ujian_pesertas()
+	{
+		return $this->hasMany(UjianPeserta::class, 'peserta_id');
 	}
 }

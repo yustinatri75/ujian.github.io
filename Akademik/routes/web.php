@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Ujian\UjianSiswaController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/auth/login');
@@ -15,6 +16,10 @@ Route::prefix('auth')->middleware('guest')->group(function () {
     Route::get('oauth/google/callback', [Auth\LoginController::class, 'handleGoogleCallback']);
 });
 Route::get('logout', [Auth\LoginController::class, 'logout'])->name('logout');
+
+Route::prefix('ujian')->group(function() {
+    Route::get('/', [UjianSiswaController::class, 'index']);
+});
 
 Route::prefix('main')->middleware('auth')->group(function () {
     Route::get('dashboard', [Main\DashboardController::class, 'index'])->name('home');
@@ -38,8 +43,8 @@ Route::prefix('main')->middleware('auth')->group(function () {
 
     Route::prefix('master/prodi')->group(function () {
         Route::get('/', [Main\MasterProdiController::class, 'index']);
-    });   
+    });
     Route::prefix('master/materi')->group(function () {
         Route::get('/', [Main\MasterMateriController::class, 'index']);
-    });   
+    });
 });
