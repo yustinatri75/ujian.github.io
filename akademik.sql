@@ -435,6 +435,7 @@ CREATE TABLE `ujian_peserta` (
   `id` int NOT NULL AUTO_INCREMENT,
   `sesi_id` int DEFAULT NULL,
   `peserta_id` bigint unsigned DEFAULT NULL,
+  `finish_awal` int NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -450,7 +451,7 @@ CREATE TABLE `ujian_peserta` (
 --
 
 /*!40000 ALTER TABLE `ujian_peserta` DISABLE KEYS */;
-INSERT INTO `ujian_peserta` (`id`, `sesi_id`, `peserta_id`, `created_at`, `updated_at`) VALUES (1,1,3,'2022-07-29 02:42:20','2022-07-29 02:42:22');
+INSERT INTO `ujian_peserta` (`id`, `sesi_id`, `peserta_id`, `finish_awal`, `created_at`, `updated_at`) VALUES (1,1,3,1,'2022-07-29 02:42:20','2022-07-29 07:11:01');
 /*!40000 ALTER TABLE `ujian_peserta` ENABLE KEYS */;
 
 --
@@ -548,4 +549,4 @@ INSERT INTO `ujian_soal` (`id`, `sesi_id`, `soal`, `created_at`, `updated_at`) V
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-29 13:54:08
+-- Dump completed on 2022-07-29 14:14:53
