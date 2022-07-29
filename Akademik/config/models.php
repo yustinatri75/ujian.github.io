@@ -281,6 +281,7 @@ return [
 
         'except' => [
             'migrations',
+            'sys_user',
         ],
 
         /*
