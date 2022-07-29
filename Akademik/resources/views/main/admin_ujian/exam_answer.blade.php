@@ -1,4 +1,3 @@
-<?php
 @extends('layouts.layout_main')
 
 @section('title', 'Dashboard')
@@ -23,7 +22,12 @@
                                 <input type="radio" name="soal_{{$soal->id}}" disabled
                                        {{ $soal->jawaban_id == $jawaban->id ? "checked" : "" }}
                                        onclick="saveAnswer({{$soal->id}}, {{$jawaban->id}})">
-                                {{$jawaban->jawaban}} <br>
+                                @if($jawaban->skor > 0)
+                                    <b style="color: green">{{$jawaban->jawaban}}</b>
+                                @else
+                                    {{$jawaban->jawaban}}
+                                @endif
+                                <br>
                             @endforeach
                         </div>
                         </p>
