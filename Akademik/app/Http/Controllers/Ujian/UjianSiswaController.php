@@ -36,11 +36,13 @@ class UjianSiswaController extends Controller
             }
 
             $dataSoal = UjianSoal::with('ujian_jawabans')
-                ->leftJoin('ujian_peserta_jawaban', function($join) use ($dataUjian){
+                ->select('ujian_peserta_jawaban.jawaban_id', 'ujian_soal.id', 'ujian_soal.sesi_id', 'ujian_soal.soal')
+                ->leftJoin('ujian_peserta_jawaban', function ($join) use ($dataUjian) {
                     $join->on('ujian_peserta_jawaban.peserta_id', DB::raw($dataUjian->id));
                     $join->on('ujian_peserta_jawaban.soal_id', 'ujian_soal.id');
                 })
                 ->get();
+
             $sisaWaktu = Carbon::now()->diffInMinutes($dataUjian->ujian_session->waktu_selesai);
             $parser = ['dataUjian' => $dataUjian, 'dataSoal' => $dataSoal, 'sisaWaktu' => $sisaWaktu];
             return view('ujian.exam')->with($parser);
@@ -65,7 +67,9 @@ class UjianSiswaController extends Controller
             }
 
             $dataSoal = UjianSoal::with('ujian_jawabans')
-                ->leftJoin('ujian_peserta_jawaban', function($join) use ($dataUjian){
+                ->select('ujian_soal.id')
+                ->select('ujian_peserta_jawaban.jawaban_id')
+                ->leftJoin('ujian_peserta_jawaban', function ($join) use ($dataUjian) {
                     $join->on('ujian_peserta_jawaban.peserta_id', DB::raw($dataUjian->id));
                     $join->on('ujian_peserta_jawaban.soal_id', 'ujian_soal.id');
                 })
