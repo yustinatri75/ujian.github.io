@@ -35,6 +35,11 @@ class SysUser extends Authenticatable
     protected $primaryKey = 'user_id';
     public $timestamps = false;
 
+    public function getAuthPassword()
+    {
+        return $this->user_password;
+    }
+
     protected $casts = [
         'user_level_id' => 'int'
     ];
