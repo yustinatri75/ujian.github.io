@@ -53,6 +53,12 @@
                         <p>Examination</p>
                     </a>
                 </li>
+                <li class="{{url()->current() == url('/main/admin/ujian') ? 'active' : ''}}">
+                    <a href="{{ url('/main/admin/ujian') }}">
+                        <i class="now-ui-icons users_single-02"></i>
+                        <p>Admin Ujian</p>
+                    </a>
+                </li>
                 <li class="{{url()->current() == url('/main/data/dosen') ? 'active' : ''}}">
                     <a href="{{ url('/main/data/dosen') }}">
                         <i class="now-ui-icons users_single-02"></i>

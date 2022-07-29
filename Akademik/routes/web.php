@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Main\AdminUjianController;
 use App\Http\Controllers\Ujian\UjianSiswaController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,12 @@ Route::prefix('ujian')->group(function () {
 
 Route::prefix('main')->middleware('auth')->group(function () {
     Route::get('dashboard', [Main\DashboardController::class, 'index'])->name('home');
+
+    Route::prefix('admin/ujian')->group(function () {
+        Route::get('/', [AdminUjianController::class, 'index']);
+        Route::get('/{sesi_id}', [AdminUjianController::class, 'detail']);
+        Route::get('/{sesi_id}/peserta/{peserta_id}/jawaban', [AdminUjianController::class, 'detailJawabanSiswa']);
+    });
 
     Route::prefix('data/mahasiswa')->group(function () {
         Route::get('/', [Main\DataMahasiswaController::class, 'index']);
